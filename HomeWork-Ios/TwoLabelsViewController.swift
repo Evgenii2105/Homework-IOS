@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TwoLabelsViewController: UIViewController {
     
     // Создал первый Label
     private let lastNameLabel: UILabel = {
@@ -44,6 +44,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        view.backgroundColor = .darkGray
     }
     
     func setupViews() {
