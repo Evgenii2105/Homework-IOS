@@ -15,6 +15,7 @@
 		D226EA0D2C7BE341000E4529 /* HomeWork_IosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D226EA0C2C7BE341000E4529 /* HomeWork_IosTests.swift */; };
 		D226EA172C7BE341000E4529 /* HomeWork_IosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D226EA162C7BE341000E4529 /* HomeWork_IosUITests.swift */; };
 		D226EA192C7BE341000E4529 /* HomeWork_IosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D226EA182C7BE341000E4529 /* HomeWork_IosUITestsLaunchTests.swift */; };
+		D2FE8F452C89BF240079D5E8 /* GuestCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE8F442C89BF240079D5E8 /* GuestCode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		D226EA122C7BE341000E4529 /* HomeWork-IosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HomeWork-IosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D226EA162C7BE341000E4529 /* HomeWork_IosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWork_IosUITests.swift; sourceTree = "<group>"; };
 		D226EA182C7BE341000E4529 /* HomeWork_IosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWork_IosUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D2FE8F442C89BF240079D5E8 /* GuestCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestCode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		D226E9E92C7BE340000E4529 = {
 			isa = PBXGroup;
 			children = (
+				D2FE8F422C89BEE00079D5E8 /* GuestCounterViewController */,
 				D226E9F42C7BE340000E4529 /* HomeWork-Ios */,
 				D226EA0B2C7BE341000E4529 /* HomeWork-IosTests */,
 				D226EA152C7BE341000E4529 /* HomeWork-IosUITests */,
@@ -122,6 +125,22 @@
 				D226EA182C7BE341000E4529 /* HomeWork_IosUITestsLaunchTests.swift */,
 			);
 			path = "HomeWork-IosUITests";
+			sourceTree = "<group>";
+		};
+		D2FE8F422C89BEE00079D5E8 /* GuestCounterViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D2FE8F432C89BEF70079D5E8 /* GuestViewController */,
+			);
+			path = GuestCounterViewController;
+			sourceTree = "<group>";
+		};
+		D2FE8F432C89BEF70079D5E8 /* GuestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D2FE8F442C89BF240079D5E8 /* GuestCode.swift */,
+			);
+			path = GuestViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D226E9FA2C7BE340000E4529 /* TwoLabelsViewController.swift in Sources */,
+				D2FE8F452C89BF240079D5E8 /* GuestCode.swift in Sources */,
 				D226E9F62C7BE340000E4529 /* AppDelegate.swift in Sources */,
 				D226E9F82C7BE340000E4529 /* SceneDelegate.swift in Sources */,
 			);
