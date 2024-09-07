@@ -9,7 +9,7 @@ import UIKit
 
 class GuestCounterViewController: UIViewController {
     
-    //создал Label, который будет счетчиком
+    // создал Label, который будет счетчиком
     private let counterLabel: UILabel = {
         let label = UILabel()
         label.text = "0"
@@ -19,7 +19,7 @@ class GuestCounterViewController: UIViewController {
         return label
     }()
     
-    //создаю две кнопки + и -
+    // создаю две кнопки + и -
     private let plusButton: UIButton = {
         let button = UIButton()
         button.setTitle("+", for: .normal)
@@ -42,14 +42,10 @@ class GuestCounterViewController: UIViewController {
         return button
     }()
     
-    //создал переменную, которая хранит текущее число
-    private var guestCount: Int = 0 {
-        didSet {
-            counterLabel.text = "\(guestCount)"
-        }
-    }
+    // создал переменную, которая хранит текущее число
+    private var guestCount: Int = 0
 
-    //загрузка
+    // загрузка
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,21 +57,30 @@ class GuestCounterViewController: UIViewController {
         
         setupConstraints()
         
-        plusButton.addTarget(self, action: #selector(increaseCount), for: .touchUpInside)
-        minusButton.addTarget(self, action: #selector(decreaseCount), for: .touchUpInside)
+        plusButton.addTarget(self, action: #selector(changeGuestCount), for: .touchUpInside)
+        minusButton.addTarget(self, action: #selector(changeGuestCount), for: .touchUpInside)
     }
     
     // методы увеличения и уменьшения
-    @objc private func increaseCount() {
-        if guestCount < 50 {
+    @objc
+    private func changeGuestCount(_ sender: UIButton) {
+        
+        switch sender {
+        case plusButton:
+            guard guestCount < 50 else {
+                return
+            }
             guestCount += 1
-        }
-    }
-    
-    @objc private func decreaseCount() {
-        if guestCount > 0 {
+            
+        case minusButton:
+            guard guestCount > 0 else {
+                return
+            }
             guestCount -= 1
+        default:
+            break
         }
+        counterLabel.text = "\(guestCount)"
     }
     
     private func setupConstraints() {
@@ -101,3 +106,4 @@ class GuestCounterViewController: UIViewController {
     }
     
 }
+
