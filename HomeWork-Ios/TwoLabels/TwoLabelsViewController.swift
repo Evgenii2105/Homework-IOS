@@ -54,7 +54,7 @@ class TwoLabelsViewController: UIViewController {
         
         // Настройка Auto Layout для контейнерного UIView и Label's
         
-        NSLayoutConstraint.activate  ([
+        NSLayoutConstraint.activate([
             labelsContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             labelsContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             labelsContainerView.widthAnchor.constraint(equalToConstant: 200),
@@ -73,4 +73,3 @@ class TwoLabelsViewController: UIViewController {
         fullNameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 }
-
