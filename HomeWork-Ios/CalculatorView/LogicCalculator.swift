@@ -9,18 +9,18 @@ import UIKit
 
 class LogicCalculator {
     
-    @objc
-    func calculateButtonPressed(myTextField: UITextField, myTextFirst: UITextField,
-                                resultLabel: UILabel) {
-        guard let numberA = Double(myTextField.text ?? ""),
-                let numberB = Double(myTextFirst.text ?? "") else {
-            resultLabel.text = "ошибка"
-            return
-        }
+    func addNumbers(_ numberA: String?, _ numberB: String?) -> String {
         
-        let result = numberA + numberB
-        resultLabel.text = "результат: \(result)"
+        guard let numberA = numberA,
+           let numberB = numberB,
+           let numA = Double(numberA),
+              let numB = Double(numberB) else {
+            return "ошибка"
+        }
+          
+        let sum = numA + numB
+        return String(sum)
+    
     }
     
 }
-                                

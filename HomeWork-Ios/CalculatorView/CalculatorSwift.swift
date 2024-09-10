@@ -25,6 +25,7 @@ class CalculatorSwift: UIViewController {
         textFile.borderStyle = .roundedRect
         textFile.keyboardType = .decimalPad
         textFile.translatesAutoresizingMaskIntoConstraints = false
+        textFile.backgroundColor = .white
         return textFile
     }()
     
@@ -34,58 +35,105 @@ class CalculatorSwift: UIViewController {
         textFirst.borderStyle = .roundedRect
         textFirst.keyboardType = .decimalPad
         textFirst.translatesAutoresizingMaskIntoConstraints = false
+        textFirst.backgroundColor = .white
         return textFirst
     }()
     
     lazy var myButton: UIButton = {
         var button = UIButton()
         button.setTitleColor(.lightGray, for: .normal)
-        button.backgroundColor = .white
+        button.layer.cornerRadius = 12
+        button.backgroundColor = .darkGray
         button.setTitle("выполнить", for: .normal)
+        button.setTitle("вычесление выполняется", for: .highlighted)
         button.addTarget(self, action: #selector(calculateSum), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    var myConteiner: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        return view
+    }()
+    
     private let calculator = LogicCalculator()
+    
+    var myBottomConstraint: NSLayoutConstraint!
         
     override func viewDidLoad() {
         view.backgroundColor = .lightGray
         super.viewDidLoad()
-        view.addSubview(myTextField)
-        view.addSubview(myTextFirst)
-        view.addSubview(resultLabel)
-        view.addSubview(myButton)
+        myConteiner.addSubview(myTextField)
+        myConteiner.addSubview(myTextFirst)
+        myConteiner.addSubview(resultLabel)
+        myConteiner.addSubview(myButton)
+        view.addSubview(myConteiner)
+        
         setupConstraints()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(moveContentUp),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(moveContentDown),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
     
+    @objc
+    func moveContentUp(notification: NSNotification) {
+        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            print("Ошибка")
+            return
+        }
+        let keyBoardFrame = keyboardSize.cgRectValue
+        let keyboardHeight = keyBoardFrame.height
+        
+        UIView.animate(withDuration: 0.3) {
+            self.myBottomConstraint.constant = -keyboardHeight
+        }
+    }
+    @objc
+    func moveContentDown(notification: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.myBottomConstraint.constant = 0
+        }
+    }
+        
     private func setupConstraints() {
+        myBottomConstraint = myConteiner.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        
         NSLayoutConstraint.activate([
-            myTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            myTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            myTextField.widthAnchor.constraint(equalToConstant: 200),
-            myTextField.heightAnchor.constraint(equalToConstant: 40),
+            myConteiner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            myBottomConstraint,
+            myConteiner.widthAnchor.constraint(equalToConstant: 250),
+            myConteiner.heightAnchor.constraint(equalToConstant: 300),
             
-            myTextFirst.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            myTextField.topAnchor.constraint(equalTo: myConteiner.topAnchor, constant: 60),
+            myTextField.leadingAnchor.constraint(equalTo: myConteiner.leadingAnchor, constant: 10),
+            myTextField.trailingAnchor.constraint(equalTo: myConteiner.trailingAnchor, constant: -10),
+            
             myTextFirst.topAnchor.constraint(equalTo: myTextField.bottomAnchor, constant: 20),
-            myTextFirst.widthAnchor.constraint(equalToConstant: 200),
-            myTextFirst.heightAnchor.constraint(equalToConstant: 40),
+            myTextFirst.leadingAnchor.constraint(equalTo: myConteiner.leadingAnchor, constant: 10),
+            myTextFirst.trailingAnchor.constraint(equalTo: myConteiner.trailingAnchor, constant: -10),
             
             myButton.topAnchor.constraint(equalTo: myTextFirst.bottomAnchor, constant: 20),
-            myButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            myButton.widthAnchor.constraint(equalToConstant: 150),
-            myButton.heightAnchor.constraint(equalToConstant: 40),
+            myButton.leadingAnchor.constraint(equalTo: myConteiner.leadingAnchor, constant: 10),
+            myButton.trailingAnchor.constraint(equalTo: myConteiner.trailingAnchor, constant: -10),
             
-            resultLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             resultLabel.topAnchor.constraint(equalTo: myButton.bottomAnchor, constant: 20),
-            resultLabel.widthAnchor.constraint(equalToConstant: 250),
-            resultLabel.heightAnchor.constraint(equalToConstant: 40)
+            resultLabel.leadingAnchor.constraint(equalTo: myConteiner.leadingAnchor, constant: 10),
+            resultLabel.trailingAnchor.constraint(equalTo: myConteiner.trailingAnchor, constant: -10),
+            resultLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     
     @objc
     private func calculateSum() {
-        calculator.calculateButtonPressed(myTextField: myTextField, myTextFirst: myTextFirst,
-                                          resultLabel: resultLabel)
+        let result = calculator.addNumbers(myTextField.text, myTextFirst.text)
+        resultLabel.text = "Результат: \(result)"
     }
 }
