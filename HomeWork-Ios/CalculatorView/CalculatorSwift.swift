@@ -51,7 +51,7 @@ class CalculatorSwift: UIViewController {
         return button
     }()
     
-    private let myConteinerView: UIView = {
+    private let myContainer: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
@@ -65,11 +65,11 @@ class CalculatorSwift: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
-        myConteinerView.addSubview(myTextField)
-        myConteinerView.addSubview(myTextFirst)
-        myConteinerView.addSubview(resultLabel)
-        myConteinerView.addSubview(myButton)
-        view.addSubview(myConteinerView)
+        myContainer.addSubview(myTextField)
+        myContainer.addSubview(myTextFirst)
+        myContainer.addSubview(resultLabel)
+        myContainer.addSubview(myButton)
+        view.addSubview(myContainer)
         
         setupConstraints()
         
@@ -107,28 +107,28 @@ class CalculatorSwift: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            myConteinerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            myConteinerView.widthAnchor.constraint(equalToConstant: 250),
-            myConteinerView.heightAnchor.constraint(equalToConstant: 300),
+            myContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            myContainer.widthAnchor.constraint(equalToConstant: 250),
+            myContainer.heightAnchor.constraint(equalToConstant: 300),
             
-            myTextField.topAnchor.constraint(equalTo: myConteinerView.topAnchor, constant: 60),
-            myTextField.leadingAnchor.constraint(equalTo: myConteinerView.leadingAnchor, constant: 10),
-            myTextField.trailingAnchor.constraint(equalTo: myConteinerView.trailingAnchor, constant: -10),
+            myTextField.topAnchor.constraint(equalTo: myContainer.topAnchor, constant: 60),
+            myTextField.leadingAnchor.constraint(equalTo: myContainer.leadingAnchor, constant: 10),
+            myTextField.trailingAnchor.constraint(equalTo: myContainer.trailingAnchor, constant: -10),
             
             myTextFirst.topAnchor.constraint(equalTo: myTextField.bottomAnchor, constant: 20),
-            myTextFirst.leadingAnchor.constraint(equalTo: myConteinerView.leadingAnchor, constant: 10),
-            myTextFirst.trailingAnchor.constraint(equalTo: myConteinerView.trailingAnchor, constant: -10),
+            myTextFirst.leadingAnchor.constraint(equalTo: myContainer.leadingAnchor, constant: 10),
+            myTextFirst.trailingAnchor.constraint(equalTo: myContainer.trailingAnchor, constant: -10),
             
             myButton.topAnchor.constraint(equalTo: myTextFirst.bottomAnchor, constant: 20),
-            myButton.leadingAnchor.constraint(equalTo: myConteinerView.leadingAnchor, constant: 10),
-            myButton.trailingAnchor.constraint(equalTo: myConteinerView.trailingAnchor, constant: -10),
+            myButton.leadingAnchor.constraint(equalTo: myContainer.leadingAnchor, constant: 10),
+            myButton.trailingAnchor.constraint(equalTo: myContainer.trailingAnchor, constant: -10),
             
             resultLabel.topAnchor.constraint(equalTo: myButton.bottomAnchor, constant: 20),
-            resultLabel.leadingAnchor.constraint(equalTo: myConteinerView.leadingAnchor, constant: 10),
-            resultLabel.trailingAnchor.constraint(equalTo: myConteinerView.trailingAnchor, constant: -10),
+            resultLabel.leadingAnchor.constraint(equalTo: myContainer.leadingAnchor, constant: 10),
+            resultLabel.trailingAnchor.constraint(equalTo: myContainer.trailingAnchor, constant: -10),
             resultLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
-        myConteinerNS = myConteinerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        myConteinerNS = myContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         myConteinerNS?.isActive = true
         
         }
