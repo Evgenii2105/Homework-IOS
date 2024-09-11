@@ -19,7 +19,7 @@ class CalculatorSwift: UIViewController {
         return label
     }()
     
-   private let myTextField: UITextField = {
+    private let myTextField: UITextField = {
         var textFile = UITextField()
         textFile.placeholder = "первое число"
         textFile.borderStyle = .roundedRect
@@ -39,7 +39,7 @@ class CalculatorSwift: UIViewController {
         return textFirst
     }()
     
-   private lazy var myButton: UIButton = {
+    private lazy var myButton: UIButton = {
         var button = UIButton()
         button.setTitleColor(.lightGray, for: .normal)
         button.layer.cornerRadius = 12
@@ -51,21 +51,20 @@ class CalculatorSwift: UIViewController {
         return button
     }()
     
-   private let myConteiner: UIView = {
+    private let myConteiner: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         return view
     }()
     
-    let calculator = LogicCalculator()
+    private let calculator = LogicCalculator()
     
-    var myBottomConstraint: NSLayoutConstraint?
+    private var myConteinerNS: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
-        myBottomConstraint = myConteiner.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         myConteiner.addSubview(myTextField)
         myConteiner.addSubview(myTextFirst)
         myConteiner.addSubview(resultLabel)
@@ -94,21 +93,21 @@ class CalculatorSwift: UIViewController {
         let keyboardHeight = keyBoardFrame.height
         
         UIView.animate(withDuration: 0.3) {
-            self.myBottomConstraint?.constant = -keyboardHeight
+            self.myConteinerNS?.constant = -keyboardHeight
         }
     }
     @objc
-   private func moveContentDown(notification: NSNotification) {
+    private func moveContentDown(notification: NSNotification) {
         UIView.animate(withDuration: 0.3) {
-            self.myBottomConstraint?.constant = 0
+            self.myConteinerNS?.constant = 0
         }
     }
-        
+    
     private func setupConstraints() {
-        guard let myBottomConstraint = myBottomConstraint else { return }
+        
         NSLayoutConstraint.activate([
+            
             myConteiner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            myBottomConstraint,
             myConteiner.widthAnchor.constraint(equalToConstant: 250),
             myConteiner.heightAnchor.constraint(equalToConstant: 300),
             
@@ -129,11 +128,13 @@ class CalculatorSwift: UIViewController {
             resultLabel.trailingAnchor.constraint(equalTo: myConteiner.trailingAnchor, constant: -10),
             resultLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
+        myConteinerNS = myConteiner.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        myConteinerNS?.isActive = true
+        
+        }
+        @objc
+        private func calculateSum() {
+            let result = calculator.addNumbers(myTextField.text, myTextFirst.text)
+            resultLabel.text = "Результат: \(result)"
+        }
     }
-    
-    @objc
-    private func calculateSum() {
-        let result = calculator.addNumbers(myTextField.text, myTextFirst.text)
-        resultLabel.text = "Результат: \(result)"
-    }
-}
