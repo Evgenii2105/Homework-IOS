@@ -60,7 +60,7 @@ class CalculatorSwift: UIViewController {
     
     private let calculator = LogicCalculator()
     
-    private var myConteinerNS: NSLayoutConstraint?
+    private var myContainerNS: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,13 +93,13 @@ class CalculatorSwift: UIViewController {
         let keyboardHeight = keyBoardFrame.height
         
         UIView.animate(withDuration: 0.3) {
-            self.myConteinerNS?.constant = -keyboardHeight
+            self.myContainerNS?.constant = -keyboardHeight
         }
     }
     @objc
     private func moveContentDown(notification: NSNotification) {
         UIView.animate(withDuration: 0.3) {
-            self.myConteinerNS?.constant = 0
+            self.myContainerNS?.constant = 0
         }
     }
     
@@ -128,8 +128,8 @@ class CalculatorSwift: UIViewController {
             resultLabel.trailingAnchor.constraint(equalTo: myContainer.trailingAnchor, constant: -10),
             resultLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
-        myConteinerNS = myContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        myConteinerNS?.isActive = true
+        myContainerNS = myContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        myContainerNS?.isActive = true
         
         }
         @objc
