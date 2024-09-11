@@ -60,7 +60,7 @@ class CalculatorSwift: UIViewController {
     
     private let calculator = LogicCalculator()
     
-    private var myContainerNS: NSLayoutConstraint?
+    private var containerConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,13 +93,13 @@ class CalculatorSwift: UIViewController {
         let keyboardHeight = keyBoardFrame.height
         
         UIView.animate(withDuration: 0.3) {
-            self.myContainerNS?.constant = -keyboardHeight
+            self.containerConstraint?.constant = -keyboardHeight
         }
     }
     @objc
     private func moveContentDown(notification: NSNotification) {
         UIView.animate(withDuration: 0.3) {
-            self.myContainerNS?.constant = 0
+            self.containerConstraint?.constant = 0
         }
     }
     
@@ -128,13 +128,14 @@ class CalculatorSwift: UIViewController {
             resultLabel.trailingAnchor.constraint(equalTo: myContainer.trailingAnchor, constant: -10),
             resultLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
-        myContainerNS = myContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        myContainerNS?.isActive = true
+        containerConstraint = myContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        containerConstraint?.isActive = true
         
-        }
-        @objc
-        private func calculateSum() {
-            let result = calculator.addNumbers(myTextField.text, myTextFirst.text)
-            resultLabel.text = "Результат: \(result)"
-        }
     }
+    
+    @objc
+    private func calculateSum() {
+        let result = calculator.addNumbers(myTextField.text, myTextFirst.text)
+        resultLabel.text = "Результат: \(result)"
+    }
+}
