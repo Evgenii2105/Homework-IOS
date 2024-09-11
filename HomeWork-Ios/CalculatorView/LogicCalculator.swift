@@ -5,7 +5,7 @@
 //  Created by Евгений Фомичев on 08.09.2024.
 //
 
-import UIKit
+import Foundation
 
 class LogicCalculator {
     
@@ -20,7 +20,5 @@ class LogicCalculator {
           
         let sum = numA + numB
         return String(sum)
-    
     }
-    
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class CalculatorSwift: UIViewController {
     
-    var resultLabel: UILabel = {
+    private let resultLabel: UILabel = {
         var label = UILabel()
         label.text = "0"
         label.font = .systemFont(ofSize: 12)
@@ -19,7 +19,7 @@ class CalculatorSwift: UIViewController {
         return label
     }()
     
-    var myTextField: UITextField = {
+   private let myTextField: UITextField = {
         var textFile = UITextField()
         textFile.placeholder = "первое число"
         textFile.borderStyle = .roundedRect
@@ -29,7 +29,7 @@ class CalculatorSwift: UIViewController {
         return textFile
     }()
     
-    var myTextFirst: UITextField = {
+    private let myTextFirst: UITextField = {
         var textFirst = UITextField()
         textFirst.placeholder = "второе число"
         textFirst.borderStyle = .roundedRect
@@ -39,7 +39,7 @@ class CalculatorSwift: UIViewController {
         return textFirst
     }()
     
-    lazy var myButton: UIButton = {
+   private lazy var myButton: UIButton = {
         var button = UIButton()
         button.setTitleColor(.lightGray, for: .normal)
         button.layer.cornerRadius = 12
@@ -51,20 +51,21 @@ class CalculatorSwift: UIViewController {
         return button
     }()
     
-    var myConteiner: UIView = {
+   private let myConteiner: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
         return view
     }()
     
-    private let calculator = LogicCalculator()
+    let calculator = LogicCalculator()
     
-    var myBottomConstraint: NSLayoutConstraint!
-        
+    var myBottomConstraint: NSLayoutConstraint?
+    
     override func viewDidLoad() {
-        view.backgroundColor = .lightGray
         super.viewDidLoad()
+        view.backgroundColor = .lightGray
+        myBottomConstraint = myConteiner.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         myConteiner.addSubview(myTextField)
         myConteiner.addSubview(myTextFirst)
         myConteiner.addSubview(resultLabel)
@@ -84,7 +85,7 @@ class CalculatorSwift: UIViewController {
     }
     
     @objc
-    func moveContentUp(notification: NSNotification) {
+    private func moveContentUp(notification: NSNotification) {
         guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
             print("Ошибка")
             return
@@ -93,19 +94,18 @@ class CalculatorSwift: UIViewController {
         let keyboardHeight = keyBoardFrame.height
         
         UIView.animate(withDuration: 0.3) {
-            self.myBottomConstraint.constant = -keyboardHeight
+            self.myBottomConstraint?.constant = -keyboardHeight
         }
     }
     @objc
-    func moveContentDown(notification: NSNotification) {
+   private func moveContentDown(notification: NSNotification) {
         UIView.animate(withDuration: 0.3) {
-            self.myBottomConstraint.constant = 0
+            self.myBottomConstraint?.constant = 0
         }
     }
         
     private func setupConstraints() {
-        myBottomConstraint = myConteiner.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        
+        guard let myBottomConstraint = myBottomConstraint else { return }
         NSLayoutConstraint.activate([
             myConteiner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             myBottomConstraint,
