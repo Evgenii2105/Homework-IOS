@@ -47,14 +47,14 @@ class CalcOSController: UIViewController {
         containerView.addSubview(stackView)
         setupConstraint()
         
-        let label = Label(colorText: .red)
+        let label = Label()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.numberOfLines = 0
         
         let container = Container(container: .car(Car(calWheels: 4, color: .brown, horsePower: 200)))
         label.setContent(container: container)
-
+        
         view.addSubview(label)
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
