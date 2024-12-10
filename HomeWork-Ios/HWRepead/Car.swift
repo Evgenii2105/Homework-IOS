@@ -81,21 +81,4 @@ class Label: UILabel {
             setContent(animal: animal)
         }
     }
-    
-    func configure(container: Container.ContainerCarAnimal) {
-        switch container {
-        case .car(let car):
-            self.text = """
-            машина имеет цвет\(car.color), \(car.horsePower) лошадинных сил, и \(car.calWheels) колеса
-            """
-            self.textColor = car.color
-            
-        case .animal(let animal):
-            self.text = """
-            Животное имеет \(animal.color) цвет, \(animal.legsCount) лап(ы),
-            \(animal.name) породу, \(animal.fly ? "да" : "нет") уменение летать
-            """
-            self.textColor = animal.color
-        }
-    }
 }
