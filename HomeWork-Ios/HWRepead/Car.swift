@@ -1,5 +1,5 @@
 //
-//  CarAnima.swift
+//  structureDescription.swift
 //  HomeWork-Ios
 //
 //  Created by Евгений Фомичев on 07.12.2024.
@@ -9,17 +9,17 @@ import UIKit
 
 struct Car {
     
-    var calWheels: Int
-    var color: UIColor
-    var horsePower: Int
+    let calWheels: Int
+    let color: UIColor
+    let horsePower: Int
 }
 
 struct Animal {
     
-    var color: UIColor
-    var name: String
-    var legsCount: Int
-    var fly: Bool
+    let color: UIColor
+    let name: String
+    let legsCount: Int
+    let fly: Bool
 }
 
 struct Container {
@@ -34,9 +34,7 @@ struct Container {
 
 class Label: UILabel {
     
-    // var colorText: UIColor
-    
-    init(colorText: UIColor) {
+    init() {
         super.init(frame: .zero)
     }
     
