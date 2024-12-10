@@ -52,7 +52,7 @@ class CalcOSController: UIViewController {
         label.textAlignment = .center
         label.numberOfLines = 0
         
-        let container = Container(container: .car(Car(calWheels: 4, color: .brown, horsePower: 200)))
+        let container = ContainerCarAnimal.car(.init(calWheels: 4, color: .green, horsePower: 250))
         label.setContent(container: container)
         
         view.addSubview(label)

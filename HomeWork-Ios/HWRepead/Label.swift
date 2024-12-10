@@ -22,14 +22,9 @@ struct Animal {
     let fly: Bool
 }
 
-struct Container {
-    
-    enum ContainerCarAnimal {
-        case car(Car)
-        case animal(Animal)
-    }
-    
-    var container: ContainerCarAnimal
+enum ContainerCarAnimal {
+    case car(Car)
+    case animal(Animal)
 }
 
 class Label: UILabel {
@@ -49,8 +44,8 @@ class Label: UILabel {
         self.textColor = animal.color
     }
     
-    func setContent(container: Container) {
-        switch container.container {
+    func setContent(container: ContainerCarAnimal) {
+        switch container {
         case .car(let car):
             setContent(car: car)
         case .animal(let animal):
