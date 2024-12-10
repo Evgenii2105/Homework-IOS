@@ -1,5 +1,5 @@
 //
-//  structureDescription.swift
+//  Label.swift
 //  HomeWork-Ios
 //
 //  Created by Евгений Фомичев on 07.12.2024.

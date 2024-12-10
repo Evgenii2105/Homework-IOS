@@ -21,7 +21,7 @@
 		D2322CFE2C8DA3B60000B802 /* CalculatorSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2322CFD2C8DA3B60000B802 /* CalculatorSwift.swift */; };
 		D2322D002C8DF6930000B802 /* LogicCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2322CFF2C8DF6930000B802 /* LogicCalculator.swift */; };
 		D249189E2D0096C500CE2656 /* CarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249189D2D0096C500CE2656 /* CarButton.swift */; };
-		D24918DD2D04624300CE2656 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24918DC2D04624300CE2656 /* Car.swift */; };
+		D24918DD2D04624300CE2656 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24918DC2D04624300CE2656 /* Label.swift */; };
 		D2548F132C8CC631006E644D /* GuestCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2548F0F2C8CC631006E644D /* GuestCounterViewController.swift */; };
 		D29E49872C9309C400F7F3B2 /* CalcOSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E49862C9309C400F7F3B2 /* CalcOSController.swift */; };
 		D29E49892C9309D700F7F3B2 /* LogicCalcOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E49882C9309D700F7F3B2 /* LogicCalcOC.swift */; };
@@ -71,7 +71,7 @@
 		D2322CFD2C8DA3B60000B802 /* CalculatorSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorSwift.swift; sourceTree = "<group>"; };
 		D2322CFF2C8DF6930000B802 /* LogicCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicCalculator.swift; sourceTree = "<group>"; };
 		D249189D2D0096C500CE2656 /* CarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarButton.swift; sourceTree = "<group>"; };
-		D24918DC2D04624300CE2656 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		D24918DC2D04624300CE2656 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		D2548F0F2C8CC631006E644D /* GuestCounterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestCounterViewController.swift; sourceTree = "<group>"; };
 		D29E49862C9309C400F7F3B2 /* CalcOSController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcOSController.swift; sourceTree = "<group>"; };
 		D29E49882C9309D700F7F3B2 /* LogicCalcOC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicCalcOC.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 		D24918982D007CD800CE2656 /* HWRepead */ = {
 			isa = PBXGroup;
 			children = (
-				D24918DC2D04624300CE2656 /* Car.swift */,
+				D24918DC2D04624300CE2656 /* Label.swift */,
 				D249189D2D0096C500CE2656 /* CarButton.swift */,
 			);
 			path = HWRepead;
@@ -460,7 +460,7 @@
 				D2322D002C8DF6930000B802 /* LogicCalculator.swift in Sources */,
 				D226E9F62C7BE340000E4529 /* AppDelegate.swift in Sources */,
 				D2548F132C8CC631006E644D /* GuestCounterViewController.swift in Sources */,
-				D24918DD2D04624300CE2656 /* Car.swift in Sources */,
+				D24918DD2D04624300CE2656 /* Label.swift in Sources */,
 				D226E9F82C7BE340000E4529 /* SceneDelegate.swift in Sources */,
 				D29E49892C9309D700F7F3B2 /* LogicCalcOC.swift in Sources */,
 			);
