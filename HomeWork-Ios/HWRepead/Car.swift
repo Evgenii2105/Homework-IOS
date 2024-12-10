@@ -7,32 +7,19 @@
 
 import UIKit
 
-class Car {
+struct Car {
     
     var calWheels: Int
     var color: UIColor
     var horsePower: Int
-    
-    init(calWheels: Int, color: UIColor, horsePower: Int) {
-        self.calWheels = calWheels
-        self.color = color
-        self.horsePower = horsePower
-    }
 }
 
-class Animal {
+struct Animal {
     
     var color: UIColor
     var name: String
     var legsCount: Int
     var fly: Bool
-    
-    init(color: UIColor, name: String, legsCount: Int, fly: Bool) {
-        self.color = color
-        self.name = name
-        self.legsCount = legsCount
-        self.fly = fly
-    }
 }
 
 struct Container {
