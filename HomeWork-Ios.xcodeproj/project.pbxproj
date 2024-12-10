@@ -20,7 +20,13 @@
 		D226EA192C7BE341000E4529 /* HomeWork_IosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D226EA182C7BE341000E4529 /* HomeWork_IosUITestsLaunchTests.swift */; };
 		D2322CFE2C8DA3B60000B802 /* CalculatorSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2322CFD2C8DA3B60000B802 /* CalculatorSwift.swift */; };
 		D2322D002C8DF6930000B802 /* LogicCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2322CFF2C8DF6930000B802 /* LogicCalculator.swift */; };
+		D249189E2D0096C500CE2656 /* CarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249189D2D0096C500CE2656 /* CarButton.swift */; };
+		D24918DD2D04624300CE2656 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24918DC2D04624300CE2656 /* Car.swift */; };
 		D2548F132C8CC631006E644D /* GuestCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2548F0F2C8CC631006E644D /* GuestCounterViewController.swift */; };
+		D29E49872C9309C400F7F3B2 /* CalcOSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E49862C9309C400F7F3B2 /* CalcOSController.swift */; };
+		D29E49892C9309D700F7F3B2 /* LogicCalcOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E49882C9309D700F7F3B2 /* LogicCalcOC.swift */; };
+		D29E498D2C9618C100F7F3B2 /* CalcOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E498C2C9618C100F7F3B2 /* CalcOperation.swift */; };
+		D29E498F2C97158D00F7F3B2 /* CalcButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E498E2C97158D00F7F3B2 /* CalcButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +70,13 @@
 		D226EA182C7BE341000E4529 /* HomeWork_IosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWork_IosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D2322CFD2C8DA3B60000B802 /* CalculatorSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorSwift.swift; sourceTree = "<group>"; };
 		D2322CFF2C8DF6930000B802 /* LogicCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicCalculator.swift; sourceTree = "<group>"; };
+		D249189D2D0096C500CE2656 /* CarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarButton.swift; sourceTree = "<group>"; };
+		D24918DC2D04624300CE2656 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		D2548F0F2C8CC631006E644D /* GuestCounterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestCounterViewController.swift; sourceTree = "<group>"; };
+		D29E49862C9309C400F7F3B2 /* CalcOSController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcOSController.swift; sourceTree = "<group>"; };
+		D29E49882C9309D700F7F3B2 /* LogicCalcOC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicCalcOC.swift; sourceTree = "<group>"; };
+		D29E498C2C9618C100F7F3B2 /* CalcOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcOperation.swift; sourceTree = "<group>"; };
+		D29E498E2C97158D00F7F3B2 /* CalcButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,8 +155,10 @@
 		D226E9F42C7BE340000E4529 /* HomeWork-Ios */ = {
 			isa = PBXGroup;
 			children = (
-				D226E9F72C7BE340000E4529 /* SceneDelegate.swift */,
 				D226E9F52C7BE340000E4529 /* AppDelegate.swift */,
+				D226E9F72C7BE340000E4529 /* SceneDelegate.swift */,
+				D24918982D007CD800CE2656 /* HWRepead */,
+				D29E49832C93099000F7F3B2 /* CalcOS */,
 				D2322CFC2C8DA39D0000B802 /* Calculator */,
 				D2548F102C8CC631006E644D /* GuestCounter */,
 				D2FE8F4C2C8A683C0079D5E8 /* TwoLabels */,
@@ -181,12 +195,32 @@
 			path = Calculator;
 			sourceTree = "<group>";
 		};
+		D24918982D007CD800CE2656 /* HWRepead */ = {
+			isa = PBXGroup;
+			children = (
+				D24918DC2D04624300CE2656 /* Car.swift */,
+				D249189D2D0096C500CE2656 /* CarButton.swift */,
+			);
+			path = HWRepead;
+			sourceTree = "<group>";
+		};
 		D2548F102C8CC631006E644D /* GuestCounter */ = {
 			isa = PBXGroup;
 			children = (
 				D2548F0F2C8CC631006E644D /* GuestCounterViewController.swift */,
 			);
 			path = GuestCounter;
+			sourceTree = "<group>";
+		};
+		D29E49832C93099000F7F3B2 /* CalcOS */ = {
+			isa = PBXGroup;
+			children = (
+				D29E49862C9309C400F7F3B2 /* CalcOSController.swift */,
+				D29E49882C9309D700F7F3B2 /* LogicCalcOC.swift */,
+				D29E498C2C9618C100F7F3B2 /* CalcOperation.swift */,
+				D29E498E2C97158D00F7F3B2 /* CalcButton.swift */,
+			);
+			path = CalcOS;
 			sourceTree = "<group>";
 		};
 		D2FE8F4C2C8A683C0079D5E8 /* TwoLabels */ = {
@@ -265,7 +299,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					D226E9F12C7BE340000E4529 = {
 						CreatedOnToolsVersion = 15.4;
@@ -417,12 +451,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D29E498F2C97158D00F7F3B2 /* CalcButton.swift in Sources */,
+				D249189E2D0096C500CE2656 /* CarButton.swift in Sources */,
+				D29E49872C9309C400F7F3B2 /* CalcOSController.swift in Sources */,
+				D29E498D2C9618C100F7F3B2 /* CalcOperation.swift in Sources */,
 				D2322CFE2C8DA3B60000B802 /* CalculatorSwift.swift in Sources */,
 				D226E9FA2C7BE340000E4529 /* TwoLabelsViewController.swift in Sources */,
 				D2322D002C8DF6930000B802 /* LogicCalculator.swift in Sources */,
 				D226E9F62C7BE340000E4529 /* AppDelegate.swift in Sources */,
 				D2548F132C8CC631006E644D /* GuestCounterViewController.swift in Sources */,
+				D24918DD2D04624300CE2656 /* Car.swift in Sources */,
 				D226E9F82C7BE340000E4529 /* SceneDelegate.swift in Sources */,
+				D29E49892C9309D700F7F3B2 /* LogicCalcOC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,7 +693,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 56560082A9C3E586ED77EED8 /* Pods-HomeWork-IosTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -674,7 +713,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 95245B5BEE3A49AD1D51AEC6 /* Pods-HomeWork-IosTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -695,7 +733,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 74FA861A65D0C74159D8271C /* Pods-HomeWork-Ios-HomeWork-IosUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4NLUV9RK3H;
@@ -714,7 +751,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0DA15EE27BB780706F45E918 /* Pods-HomeWork-Ios-HomeWork-IosUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4NLUV9RK3H;

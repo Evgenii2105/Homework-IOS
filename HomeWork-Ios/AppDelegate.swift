@@ -29,6 +29,5 @@ func application(_ application: UIApplication,
     }
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        
-    }
+        }
 }

@@ -104,5 +104,4 @@ class GuestCounterViewController: UIViewController {
             minusButton.heightAnchor.constraint(equalToConstant: 75)
         ])
     }
-    
 }
