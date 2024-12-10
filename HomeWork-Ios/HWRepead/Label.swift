@@ -34,15 +34,6 @@ struct Container {
 
 class Label: UILabel {
     
-    init() {
-        super.init(frame: .zero)
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     func setContent(car: Car) {
         self.text = """
             машина имеет цвет\(car.color), \(car.horsePower) лошадинных сил, и \(car.calWheels) колеса
