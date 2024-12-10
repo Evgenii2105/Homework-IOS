@@ -79,5 +79,3 @@ class CarButton: UIButton {
         }
     }
 }
-
-let car = CarButton(сarButton: .black)

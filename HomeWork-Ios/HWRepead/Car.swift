@@ -20,8 +20,6 @@ class Car {
     }
 }
 
-let carCopy = Car(calWheels: 4, color: .red, horsePower: 200)
-
 class Animal {
     
     var color: UIColor
@@ -37,8 +35,6 @@ class Animal {
     }
 }
 
-let animalCopy = Animal(color: .brown, name: "Воробей", legsCount: 2, fly: true)
-
 struct Container {
     
     enum ContainerCarAnimal {
@@ -48,8 +44,6 @@ struct Container {
     
     var container: ContainerCarAnimal
 }
-
-let con = Container.ContainerCarAnimal.animal(animalCopy)
 
 class Label: UILabel {
     
@@ -87,21 +81,21 @@ class Label: UILabel {
             setContent(animal: animal)
         }
     }
-//    
-//    func configure(container: Container.ContainerCarAnimal) {
-//        switch container {
-//        case .car(let car):
-//            self.text = """
-//            машина имеет цвет\(car.color), \(car.horsePower) лошадинных сил, и \(car.calWheels) колеса
-//            """
-//            self.textColor = car.color
-//            
-//        case .animal(let animal):
-//            self.text = """
-//            Животное имеет \(animal.color) цвет, \(animal.legsCount) лап(ы),
-//            \(animal.name) породу, \(animal.fly ? "да" : "нет") уменение летать
-//            """
-//            self.textColor = animal.color
-//        }
-//    }
+    
+    func configure(container: Container.ContainerCarAnimal) {
+        switch container {
+        case .car(let car):
+            self.text = """
+            машина имеет цвет\(car.color), \(car.horsePower) лошадинных сил, и \(car.calWheels) колеса
+            """
+            self.textColor = car.color
+            
+        case .animal(let animal):
+            self.text = """
+            Животное имеет \(animal.color) цвет, \(animal.legsCount) лап(ы),
+            \(animal.name) породу, \(animal.fly ? "да" : "нет") уменение летать
+            """
+            self.textColor = animal.color
+        }
+    }
 }
