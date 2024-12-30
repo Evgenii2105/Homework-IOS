@@ -10,8 +10,7 @@ import UIKit
 class CalcOSController: UIViewController {
     
     private var buttons: [CalcButton] = []
-    var objectInputLogic = InputOperation(lhs: 0.0, rhs: 0.0, operation: .addition)
-    var logic = LogicCalcOC()
+    private var objectInputLogic = InputOperation(lhs: 0.0, rhs: 0.0, operation: .addition)
     
     private let labelResult: UILabel = {
         let label = UILabel()
@@ -84,7 +83,7 @@ class CalcOSController: UIViewController {
         }
     }
     
-    func setUpDigit(_ digit: DigitOperation) {
+    private func setUpDigit(_ digit: DigitOperation) {
         var digitResult = labelResult.text ?? "0"
         let inputLhs = digit.title
         if digitResult == "0" {
@@ -101,7 +100,7 @@ class CalcOSController: UIViewController {
         }
     }
     
-    func setUpCalcOperation(_ operation: CalcOperation, _ input: InputOperation) {
+    private func setUpCalcOperation(_ operation: CalcOperation, _ input: InputOperation) {
         switch operation {
         case .addition, .division, .multiplication, .subtraction:
             objectInputLogic.operation = operation
@@ -154,4 +153,4 @@ class CalcOSController: UIViewController {
             stackView.heightAnchor.constraint(equalToConstant: 350)
         ])
     }
-} 
+}
