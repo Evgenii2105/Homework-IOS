@@ -9,18 +9,24 @@ import UIKit
 
 class CalcButton: UIButton {
     
-    var operation: UtilOperation?
+    var operation: UtilOperation
     
-    // init(operation: UtilOperation? = nil) {
-    //     super.init(frame: .zero)
-    //     self.operation = operation
-    // }
+    init(operation: UtilOperation) {
+        self.operation = operation
+        super.init(frame: .zero)
+        styleButton(operation)
+    }
     
-    // required init(coder: NSCoder) {
-    //     fatalError("init(coder:) has not been implemented")
-    // }
+    @available(*, unavailable)
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    override func setTitle(_ title: String?, for state: UIControl.State) {
-        super.setTitle(operation?.title, for: state)
+    private func styleButton(_ operation: UtilOperation) {
+        self.layer.cornerRadius = 25
+        self.titleLabel?.font = .systemFont(ofSize: 25, weight: .bold)
+        self.backgroundColor = .orange
+        self.setTitleColor(.white, for: .normal)
+        setTitle(operation.title, for: .normal)
     }
 }

@@ -9,148 +9,149 @@ import UIKit
 
 class CalcOSController: UIViewController {
     
-    private var buttons: [UtilOperation: CalcButton] = [:]
+    private var buttons: [CalcButton] = []
+    var objectInputLogic = InputOperation(lhs: 0.0, rhs: 0.0, operation: .addition)
+    var logic = LogicCalcOC()
     
-    let labelResult: UILabel = {
+    private let labelResult: UILabel = {
         let label = UILabel()
         label.text = "0"
-        label.backgroundColor = .white
+        label.textColor = .white
+        label.backgroundColor = .black
         label.textAlignment = .right
         label.font = .systemFont(ofSize: 40)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let myStackView = UIStackView()
         myStackView.axis = .vertical
         myStackView.distribution = .fillEqually
         myStackView.spacing = 10
-        myStackView.backgroundColor = .blue
+        myStackView.backgroundColor = .black
         myStackView.translatesAutoresizingMaskIntoConstraints = false
         return myStackView
     }()
     
-    let containerView: UIView = {
+    private let containerView: UIView = {
         let container = UIView()
+        container.backgroundColor = .black
         container.translatesAutoresizingMaskIntoConstraints = false
-        container.backgroundColor = .blue
         return container
     }()
+    
+    private let logicOperation = LogicCalcOC()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // prepareButtons()
         view.addSubview(containerView)
         containerView.addSubview(labelResult)
         containerView.addSubview(stackView)
         setupConstraint()
+        prepareButtons()
         
-        let label = Label()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        
-        let container = ContainerCarAnimal.car(.init(calWheels: 4, color: .green, horsePower: 250))
-        label.setContent(container: container)
-        
-        view.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        
-        var array = [buttons[.calcOperation(.clear)],
-                     buttons[.calcOperation(.negative)],
-                     buttons[.calcOperation(.percent)],
-                     buttons[.calcOperation(.division)]
-        ]
-        
-        array.append(contentsOf: [buttons[.digitOperaton(.seven)],
-                                  buttons[.digitOperaton(.eight)],
-                                  buttons[.digitOperaton(.nine)],
-                                  buttons[.calcOperation(.multiplication)]])
-        
-        array.append(contentsOf: [buttons[.digitOperaton(.four)],
-                                  buttons[.digitOperaton(.five)],
-                                  buttons[.digitOperaton(.five)],
-                                  buttons[.digitOperaton(.six)],
-                                  buttons[.calcOperation(.subtraction)]])
-        
-        array.append(contentsOf: [buttons[.digitOperaton(.one)],
-                                  buttons[.digitOperaton(.two)],
-                                  buttons[.digitOperaton(.three)],
-                                  buttons[.calcOperation(.addition)]])
-        
-        array.append(contentsOf: [buttons[.digitOperaton(.zero)],
-                                  buttons[.calcOperation(.comma)],
-                                  buttons[.calcOperation(.equals)]])
-        
-        createRow(withButtons: array.compactMap { $0 })
-    }
-    
-    // func prepareButtons() {
-    //     for i in UtilOperation.allCases {
-    //         switch i {
-    //         case .digitOperaton(let digitOperation):
-    //             buttons[i] = CalcButton(operation: i)
-    //         case .calcOperation(let calcOperation):
-    //             buttons[i] = CalcButton(operation: i)
-    //         }
-    //     }
-    // }
-    
-    @objc
-    func number() {
-    }
-    
-    @objc
-    func clearResult() {
-        
-        labelResult.text = "0"
-    }
-    
-    @objc
-    func addNumber(_ sender: UIButton) {
-    }
-    
-    func createRow(withButtons: [CalcButton]) -> UIStackView {
-        let rowstackView = UIStackView(arrangedSubviews: withButtons)
-        rowstackView.axis = .horizontal
-        rowstackView.spacing = 10
-        rowstackView.distribution = .fillEqually
-        return rowstackView
-    }
-    
-    @objc
-    func numberPressed(_ sender: UIButton) {
-        let number = sender.currentTitle!
-        if labelResult.text == "0" {
-            labelResult.text = number
-        } else {
-            labelResult.text = "\(labelResult.text!)\(number)"
+        for row in stride(from: 0, to: buttons.count, by: 4) {
+            let rowStack = UIStackView()
+            rowStack.axis = .horizontal
+            rowStack.distribution = .fillEqually
+            rowStack.spacing = 10
+            
+            let buttonRow = buttons[row..<min(row + 4, buttons.count)].compactMap { $0 }
+            for button in buttonRow {
+                rowStack.addArrangedSubview(button)
+            }
+            stackView.addArrangedSubview(rowStack)
         }
     }
     
-    func setupConstraint() {
+    private func prepareButtons() {
+        for operation in UtilOperation.allCases {
+            let button = CalcButton(operation: operation)
+            buttons.append(button)
+            button.addTarget(self, action: #selector(processButton), for: .touchUpInside)
+        }
+    }
+    
+    @objc
+    func processButton(sender: CalcButton) {
+        switch sender.operation {
+        case .digitOperaton(let digitOperation):
+            setUpDigit(digitOperation)
+        case .calcOperation(let oper):
+            setUpCalcOperation(oper, objectInputLogic)
+        }
+    }
+    
+    func setUpDigit(_ digit: DigitOperation) {
+        var digitResult = labelResult.text ?? "0"
+        let inputLhs = digit.title
+        if digitResult == "0" {
+            digitResult = inputLhs
+        } else {
+            digitResult += inputLhs
+        }
+        labelResult.text = digitResult
+        
+        if objectInputLogic.operation == .equals || objectInputLogic.operation == .clear {
+            objectInputLogic.lhs = Double(digitResult) ?? 0.0
+        } else {
+            objectInputLogic.rhs = Double(digitResult) ?? 0.0
+        }
+    }
+    
+    func setUpCalcOperation(_ operation: CalcOperation, _ input: InputOperation) {
+        switch operation {
+        case .addition, .division, .multiplication, .subtraction:
+            objectInputLogic.operation = operation
+            objectInputLogic.lhs = Double(labelResult.text ?? "0") ?? 0.0
+            labelResult.text = "0"
+        case .equals:
+            logicOperation.performCalculation(objectInputLogic)
+            labelResult.text = "\(logicOperation.sum)"
+        case .clear:
+            objectInputLogic = InputOperation(lhs: 0.0, rhs: 0.0, operation: .clear)
+            labelResult.text = "0"
+        case .negative:
+            var negativeResult = Double(labelResult.text ?? "0")
+            labelResult.text = "\(-(negativeResult ?? 0.0))"
+            if objectInputLogic.lhs == 0.0 {
+                negativeResult = -objectInputLogic.lhs
+            } else {
+                negativeResult = -objectInputLogic.rhs
+            }
+        case .percent:
+            var persentResult = Double(labelResult.text ?? "0")
+            labelResult.text = "\((persentResult ?? 0.0).truncatingRemainder(dividingBy: persentResult ?? 0.0))"
+            if objectInputLogic.lhs == 0 {
+                persentResult = objectInputLogic.lhs.truncatingRemainder(dividingBy: objectInputLogic.lhs)
+            }
+        case .comma:
+            if !(labelResult.text?.contains(".") ?? false) {
+                labelResult.text? += "."
+            }
+        }
+    }
+    
+    private func setupConstraint() {
         
         NSLayoutConstraint.activate([
+            
+            containerView.topAnchor.constraint(equalTo: view.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            labelResult.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            labelResult.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            labelResult.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            labelResult.heightAnchor.constraint(equalToConstant: 250),
+            
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            
-            labelResult.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            labelResult.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            labelResult.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            labelResult.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -20),
-            labelResult.heightAnchor.constraint(equalToConstant: 225),
-            
-            containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            stackView.heightAnchor.constraint(equalToConstant: 350)
         ])
     }
-    
-    func addsetupButton() {
-    }
-}
+} 

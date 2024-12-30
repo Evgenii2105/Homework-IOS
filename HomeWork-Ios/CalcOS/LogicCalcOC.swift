@@ -9,16 +9,36 @@ import Foundation
 
 class LogicCalcOC {
     
-    var currentNumber: Double = 0
-    var previousNumber: Double = 0
-    var perations: CalcOperation?
+    var sum: Double = 0.0
     
-    func inputnumber(_ number: Double) {
-        currentNumber = number
+    func performCalculation(_ input: InputOperation) {
+        switch input.operation {
+        case .addition:
+            sum = input.lhs + input.rhs
+        case .subtraction:
+            sum = input.lhs - input.rhs
+        case .multiplication:
+            sum = input.lhs * input.rhs
+        case .division:
+            sum = input.lhs / input.rhs
+        case .equals:
+            print(sum)
+        case .clear:
+            print(sum)
+        case .negative:
+            sum = -sum
+        case .percent:
+            sum = input.lhs / input.rhs
+        case .comma:
+            if !String(input.lhs).contains(".") {
+            }
+        }
     }
+}
+
+struct InputOperation {
     
-    let operations = ["+", "-", "x", "/"]
-    
-    func add() {
-    }
+    var lhs: Double
+    var rhs: Double
+    var operation: CalcOperation
 }
