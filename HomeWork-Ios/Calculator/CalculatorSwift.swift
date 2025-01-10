@@ -96,6 +96,7 @@ class CalculatorSwift: UIViewController {
             self.containerConstraint?.constant = -keyboardHeight
         }
     }
+    
     @objc
     private func moveContentDown(notification: NSNotification) {
         UIView.animate(withDuration: 0.3) {
@@ -130,7 +131,6 @@ class CalculatorSwift: UIViewController {
         ])
         containerConstraint = myContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         containerConstraint?.isActive = true
-        
     }
     
     @objc
