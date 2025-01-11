@@ -20,6 +20,8 @@ class TableViewController: UIViewController {
     
     private var containerConstraint: NSLayoutConstraint?
     
+    private let cellIdentifier = "ToDoItemCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -103,6 +105,13 @@ class TableViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = apperance
     }
     
+    private func configureTableView() {
+        table.delegate = self
+        table.dataSource = self
+        table.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        table.allowsSelection = false
+    }
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             table.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -115,19 +124,12 @@ class TableViewController: UIViewController {
 
 extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     
-    private func configureTableView() {
-        table.delegate = self
-        table.dataSource = self
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        table.allowsSelection = false
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "ToDoCell")
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         let toDoItem = todos[indexPath.row]
         
         cell.textLabel?.text = toDoItem.name
