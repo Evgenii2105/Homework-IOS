@@ -16,10 +16,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = CalculatorSwift()
-        window?.makeKeyAndVisible()
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = UINavigationController(rootViewController: ViewController())
+        window.makeKeyAndVisible()
+        self.window = window
         
+//        window = UIWindow(windowScene: windowScene)
+//        window?.rootViewController = TableViewController()
+//        window?.makeKeyAndVisible()
+//        window?.backgroundColor = .red
     }
-    
 }
