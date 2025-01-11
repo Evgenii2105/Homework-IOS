@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TableViewController.swift
 //  HomeWork-Ios
 //
 //  Created by Евгений Фомичев on 05.01.2025.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TableViewController: UIViewController {
     
-    var todos: [TodoItem] = [TodoItem(name: "Test"), TodoItem(name: "Test1")]
+    private var todos: [TodoItem] = [TodoItem(name: "Test"), TodoItem(name: "Test1")]
     
     private var table: UITableView = {
         let table = UITableView()
@@ -57,6 +57,7 @@ class ViewController: UIViewController {
             self.containerConstraint?.constant = -keyboardHeight
         }
     }
+    
     @objc
     private func moveContentDown(notification: NSNotification) {
         UIView.animate(withDuration: 0.3) {
@@ -69,10 +70,10 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "Create todo", message: "", preferredStyle: .alert)
         alert.addTextField()
         let saveButton = UIAlertAction(title: "Save", style: .default) { _ in
-            if let textName = alert.textFields?.first?.text {
-                self.addtoDo(name: textName)
-            }
+            guard let textName = alert.textFields?.first?.text else { return }
+            self.addtoDo(name: textName)
         }
+        
         alert.addAction(saveButton)
         let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
         alert.addAction(cancelButton)
@@ -80,17 +81,9 @@ class ViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    func addtoDo(name: String) {
+    private func addtoDo(name: String) {
         todos.append(TodoItem(name: name))
         table.reloadData()
-    }
-    
-    // подписываюсь на протоколы
-    func configureTableView() {
-        table.delegate = self
-        table.dataSource = self
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        table.allowsSelection = false
     }
     
     // фунцкия для удаления
@@ -120,7 +113,14 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension TableViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    private func configureTableView() {
+        table.delegate = self
+        table.dataSource = self
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.allowsSelection = false
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todos.count
@@ -144,10 +144,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+        guard editingStyle == .delete else { return }
             todos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .left)
-        }
     }
     
     // move:
@@ -167,18 +166,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, canPerformAction action: Selector,
                    forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        if action == #selector(copy(_:)) {
+        guard action == #selector(copy(_:)) else { return false }
             return true
-        }
-        return false
     }
     
     func tableView(_ tableView: UITableView, performAction action: Selector,
                    forRowAt indexPath: IndexPath, withSender sender: Any?) {
-        if action == #selector(copy(_:)) {
+        guard action == #selector(copy(_:)) else { return }
             let cell = tableView.cellForRow(at: indexPath)
             let pasteBoard = UIPasteboard.general
             pasteBoard.string = cell?.textLabel?.text
-        }
     }
 }

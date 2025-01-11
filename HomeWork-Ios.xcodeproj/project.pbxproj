@@ -21,7 +21,7 @@
 		D2322CFE2C8DA3B60000B802 /* CalculatorSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2322CFD2C8DA3B60000B802 /* CalculatorSwift.swift */; };
 		D2322D002C8DF6930000B802 /* LogicCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2322CFF2C8DF6930000B802 /* LogicCalculator.swift */; };
 		D2548F132C8CC631006E644D /* GuestCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2548F0F2C8CC631006E644D /* GuestCounterViewController.swift */; };
-		D26E3F062D2AEADF008EC997 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E3F052D2AEADF008EC997 /* ViewController.swift */; };
+		D26E3F062D2AEADF008EC997 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E3F052D2AEADF008EC997 /* TableViewController.swift */; };
 		D26E3F0C2D2C6B24008EC997 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E3F0B2D2C6B24008EC997 /* TodoItem.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +67,7 @@
 		D2322CFD2C8DA3B60000B802 /* CalculatorSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorSwift.swift; sourceTree = "<group>"; };
 		D2322CFF2C8DF6930000B802 /* LogicCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicCalculator.swift; sourceTree = "<group>"; };
 		D2548F0F2C8CC631006E644D /* GuestCounterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestCounterViewController.swift; sourceTree = "<group>"; };
-		D26E3F052D2AEADF008EC997 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D26E3F052D2AEADF008EC997 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		D26E3F0B2D2C6B24008EC997 /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,7 +197,7 @@
 		D26E3F042D2AEAA3008EC997 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				D26E3F052D2AEADF008EC997 /* ViewController.swift */,
+				D26E3F052D2AEADF008EC997 /* TableViewController.swift */,
 				D26E3F0B2D2C6B24008EC997 /* TodoItem.swift */,
 			);
 			path = TableView;
@@ -433,7 +433,7 @@
 			files = (
 				D2322CFE2C8DA3B60000B802 /* CalculatorSwift.swift in Sources */,
 				D226E9FA2C7BE340000E4529 /* TwoLabelsViewController.swift in Sources */,
-				D26E3F062D2AEADF008EC997 /* ViewController.swift in Sources */,
+				D26E3F062D2AEADF008EC997 /* TableViewController.swift in Sources */,
 				D26E3F0C2D2C6B24008EC997 /* TodoItem.swift in Sources */,
 				D2322D002C8DF6930000B802 /* LogicCalculator.swift in Sources */,
 				D226E9F62C7BE340000E4529 /* AppDelegate.swift in Sources */,
