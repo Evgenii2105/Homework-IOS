@@ -129,7 +129,7 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "ToDoCell")
         let toDoItem = todos[indexPath.row]
-                                                 
+        
         cell.textLabel?.text = toDoItem.name
         cell.accessoryType = .checkmark
         
@@ -145,8 +145,8 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-            todos.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .left)
+        todos.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .left)
     }
     
     // move:
@@ -167,14 +167,14 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canPerformAction action: Selector,
                    forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         guard action == #selector(copy(_:)) else { return false }
-            return true
+        return true
     }
     
     func tableView(_ tableView: UITableView, performAction action: Selector,
                    forRowAt indexPath: IndexPath, withSender sender: Any?) {
         guard action == #selector(copy(_:)) else { return }
-            let cell = tableView.cellForRow(at: indexPath)
-            let pasteBoard = UIPasteboard.general
-            pasteBoard.string = cell?.textLabel?.text
+        let cell = tableView.cellForRow(at: indexPath)
+        let pasteBoard = UIPasteboard.general
+        pasteBoard.string = cell?.textLabel?.text
     }
 }
