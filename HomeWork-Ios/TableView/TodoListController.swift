@@ -1,5 +1,5 @@
 //
-//  TableViewController.swift
+//  TodoListController.swift
 //  HomeWork-Ios
 //
 //  Created by Евгений Фомичев on 05.01.2025.
@@ -7,11 +7,13 @@
 
 import UIKit
 
-class TableViewController: UIViewController {
+class TodoListController: UIViewController, TodoListViewProtocol {
     
-    private var todos: [TodoItem] = [TodoItem(name: "Test"), TodoItem(name: "Test1")]
+    private let todos: [TodoItem]
     
-    private var table: UITableView = {
+    private lazy var presenter: TodoListPresenterProtocol = TodoListPresenter(view: self)
+    
+    private let table: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.backgroundColor = .white
@@ -19,22 +21,31 @@ class TableViewController: UIViewController {
     }()
     
     private var containerConstraint: NSLayoutConstraint?
-    
     private let cellIdentifier = "ToDoItemCell"
+    
+    init() {
+        self.todos = []
+        super.init(nibName: nil, bundle: nil)
+        self.presenter = TodoListPresenter(view: self)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = TodoListPresenter(view: self)
         view.backgroundColor = .white
         view.addSubview(table)
         configureTableView()
         setupConstraints()
         setaper()
+        table.rowHeight = 80
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(openAlert))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
-                                                           target: self,
-                                                           action: #selector(editList))
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(moveContentUp),
@@ -73,7 +84,7 @@ class TableViewController: UIViewController {
         alert.addTextField()
         let saveButton = UIAlertAction(title: "Save", style: .default) { _ in
             guard let textName = alert.textFields?.first?.text else { return }
-            self.addtoDo(name: textName)
+            self.presenter.AddTodo(title: textName, subTitle: "")
         }
         
         alert.addAction(saveButton)
@@ -83,15 +94,15 @@ class TableViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    private func addtoDo(name: String) {
-        todos.append(TodoItem(name: name))
+    func reloadTableView() {
         table.reloadData()
     }
     
-    // фунцкия для удаления
-    @objc
-    private func editList(param: UIBarButtonItem) {
-        table.isEditing = !table.isEditing
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
     
     // Mark : создание линии
@@ -108,8 +119,8 @@ class TableViewController: UIViewController {
     private func configureTableView() {
         table.delegate = self
         table.dataSource = self
-        table.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        table.allowsSelection = false
+        table.register(CustomTableCell.self, forCellReuseIdentifier: cellIdentifier)
+        table.allowsSelectionDuringEditing = true
     }
     
     private func setupConstraints() {
@@ -122,33 +133,37 @@ class TableViewController: UIViewController {
     }
 }
 
-extension TableViewController: UITableViewDelegate, UITableViewDataSource {
+extension TodoListController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todos.count
+        return presenter.todos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
-        let toDoItem = todos[indexPath.row]
         
-        cell.textLabel?.text = toDoItem.name
-        cell.accessoryType = .checkmark
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+                                                       for: indexPath) as? CustomTableCell else {
+            return UITableViewCell()
+        }
+        
+        let todoItem = presenter.todos[indexPath.row]
+        cell.configure(with: todoItem)
         
         return cell
     }
     
     // delete:
-    func tableView(_ tableView: UITableView,
-                   editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else { return }
-        todos.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .left)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, completionHandler in
+            self.presenter.deleteTodo(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            completionHandler(true)
+        }
+        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.backgroundColor = .systemRed
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
     }
     
     // move:
@@ -157,9 +172,7 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let item = todos[sourceIndexPath.row]
-        todos.remove(at: sourceIndexPath.row)
-        todos.insert(item, at: destinationIndexPath.row)
+        presenter.moveTodo(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
